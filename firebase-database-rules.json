@@ -1,0 +1,20 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "Teachers": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": false
+      }
+    },
+    "Students": {
+      "Students": {
+        "$roll": {
+          ".read": true,
+          ".write": "auth != null && root.child('Teachers').child(auth.uid).child('role').val() == 'teacher' && root.child('Teachers').child(auth.uid).child('active').val() != false"
+        }
+      }
+    }
+  }
+}
